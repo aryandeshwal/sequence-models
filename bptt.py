@@ -1,3 +1,16 @@
+def prediction(x):
+    T = len(x)
+    # TODO reference HIDDEN_DIM somewhere
+    h = np.zeros((T + 1, HIDDEN_DIM)) # hidden states
+    h[-1] = np.zeros(HIDDEN_DIM)
+
+    # TODO reference WORD_DIM somewhere
+    preds = np.zeros((T, WORD_DIM))
+    for t in range(T):
+        h[t] = np.tanh(np.dot(U, x) + np.dot(W, h[t-1]))
+        pred[t] = np.softmax(np.dot(V, h[t]))
+    return preds, h
+
 # Backprop through time in numpy
 # motivated from WILDML page(https://bit.ly/1R2jmNz)
 def bptt(x, y):
